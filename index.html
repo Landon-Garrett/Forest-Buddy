@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Forest Buddy – Live Data</title>
+
+  <!-- Leaflet's stylesheet (needed for the map to draw correctly) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Forest Buddy</h1>
+    <div class="controls">
+      <label for="runSelect">Run</label>
+      <select id="runSelect"></select>
+      <button id="exportBtn" type="button">Export CSV</button>
+    </div>
+  </header>
+
+  <!-- Hidden until 30 s pass with no new data -->
+  <div id="linkLost" class="banner hidden" role="alert">
+    ⚠ Link lost — no data received for <span id="lostSecs">30</span> s
+  </div>
+  <div id="errorBox" class="banner error hidden" role="alert"></div>
+
+  <section class="stats">
+    <div><span class="label">Points shown (graph)</span><span id="pointCount">0</span></div>
+    <div><span class="label">Points on map</span><span id="mapCount">0</span></div>
+    <div><span class="label">Records in database</span><span id="dbCount">–</span></div>
+    <div><span class="label">Data rate</span><span id="dataRate">–</span></div>
+    <div><span class="label">Live connection</span><span id="liveStatus">connecting…</span></div>
+  </section>
+
+  <main>
+    <section class="panel">
+      <h2>Attenuation heat map</h2>
+      <div id="map"></div>
+    </section>
+    <section class="panel">
+      <h2>Attenuation vs. time</h2>
+      <div id="chart"></div>
+    </section>
+  </main>
+
+  <section class="panel" id="selected">
+    <h2>Selected point</h2>
+    <div id="selectedBody">Click a point on the map or graph to see its stored values.</div>
+  </section>
+
+  <!-- Libraries (loaded from free CDNs), then our own code last -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>
